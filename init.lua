@@ -9,7 +9,7 @@ planetoidgen = {
 local MP = minetest.get_modpath("planetoidgen")
 
 dofile(MP.."/planets.lua")
-dofile(MP.."/override.lua")
+dofile(MP.."/vacuum.lua")
 dofile(MP.."/mapgen.lua")
 
 print("[OK] Planetoidgen")
