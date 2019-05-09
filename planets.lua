@@ -1,7 +1,7 @@
 
 local save_data = function()
 
-   local data = minetest.write_json(planetoids.planets, true);
+   local data = minetest.write_json(planetoidgen.planets, true);
    local path = minetest.get_worldpath().."/planets.json";
 
    local file = io.open( path, "w" );

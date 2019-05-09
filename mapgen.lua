@@ -1,3 +1,8 @@
+local c_ignore = minetest.get_content_id("ignore")
+local c_air = minetest.get_content_id("air")
+
+local c_shell = minetest.get_content_id("default:stone")
+local c_top = minetest.get_content_id("default:dirt")
 
 
 local get_corners = function(minp, maxp)
@@ -39,10 +44,39 @@ minetest.register_on_generated(function(minp, maxp, seed)
 
 
 	local vm, emin, emax = minetest.get_mapgen_object("voxelmanip")
+	local data = vm:get_data()
 	local area = VoxelArea:new{MinEdge=emin, MaxEdge=emax}
 
-  -- TODO
+	for i in area:iter(
+		minp.x, minp.y, minp.z,
+		maxp.x, maxp.y, maxp.z
+	) do
+		if data[i] == c_air or data[i] == c_ignore then
+			local pos = area:position(i)
+			local distance_to_center = vector.distance(pos, planet.pos)
 
+			-- check if inside radius
+			if distance_to_center <= planet.radius then
+
+				local is_outer_shell = pos.y < planet.pos.y
+				local is_top = pos.y == planet.pos.y
+
+				if is_outer_shell then
+					data[i] = c_shell
+
+				elseif is_top then
+					data[i] = c_top
+
+				end
+
+			end -- distance check
+		end -- air check
+	end -- iter
+
+	-- minetest.generate_decorations(vm, pos1, pos2)
+	-- minetest.generate_ores(vm, pos1, pos2)
+
+	vm:set_data(data)
 	vm:write_to_map()
 
 end)
