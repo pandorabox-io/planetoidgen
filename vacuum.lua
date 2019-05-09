@@ -8,7 +8,7 @@ if has_vacuum_mod then
     for _, planet in ipairs(planetoidgen.planets) do
       local distance = vector.distance(pos, planet.pos)
 
-      if distance < planet.radius+80 then
+      if distance < planet.radius+160 then
         -- planet is here, not space (plus safety margin for air shell)
         return false
       end

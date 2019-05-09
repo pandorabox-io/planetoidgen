@@ -2,7 +2,7 @@ local c_ignore = minetest.get_content_id("ignore")
 local c_air = minetest.get_content_id("air")
 
 local c_shell = minetest.get_content_id("default:stone")
-local c_top = minetest.get_content_id("default:dirt")
+local c_top = minetest.get_content_id("default:dirt_with_grass")
 
 
 local get_corners = function(minp, maxp)
@@ -31,7 +31,7 @@ minetest.register_on_generated(function(minp, maxp, seed)
 		for _, p in ipairs(planetoidgen.planets) do
 			local distance = vector.distance(pos, p.pos)
 
-			if distance < planet.radius then
+			if distance < p.radius then
 				planet = p
 			end
 		end
@@ -75,6 +75,7 @@ minetest.register_on_generated(function(minp, maxp, seed)
 	end -- iter
 
 	if minp.y < planet.pos.y then
+		print("[planetoidgen] generating ores for " .. minetest.pos_to_string(minp))
 		-- generate ores
 		minetest.generate_ores(vm, minp, {
 			x = maxp.x,
@@ -84,9 +85,10 @@ minetest.register_on_generated(function(minp, maxp, seed)
 
 	end
 	if minp.y <= planet.pos.y and maxp.y >= planet.pos.y then
+		print("[planetoidgen] generating decos for " .. minetest.pos_to_string(minp))
 		-- generate decorations
 		minetest.generate_decorations(vm, {
-			x = minp.x, y = planet.pos.y, z=minp.z
+			x = minp.x, y = planet.pos.y-20, z=minp.z
 		}, {
 			x = maxp.x, y = planet.pos.y+10, z=maxp.z
 		})
