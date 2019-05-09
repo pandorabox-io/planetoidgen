@@ -73,8 +73,24 @@ minetest.register_on_generated(function(minp, maxp, seed)
 		end -- air check
 	end -- iter
 
-	-- minetest.generate_decorations(vm, pos1, pos2)
-	-- minetest.generate_ores(vm, pos1, pos2)
+	if minp.y < planet.pos.y then
+		-- generate ores
+		minetest.generate_ores(vm, minp, {
+			x = maxp.x,
+			y = math.min(maxp.y, planet.pos.y-1),
+			z = maxp.z
+		})
+
+	end
+	if minp.y <= planet.pos.y and maxp.y >= planet.pos.y then
+		-- generate decorations
+		minetest.generate_decorations(vm, {
+			x = minp.x, y = planet.pos.y, z=minp.z
+		}, {
+			x = maxp.x, y = planet.pos.y+10, z=maxp.z
+		})
+
+	end
 
 	vm:set_data(data)
 	vm:write_to_map()
