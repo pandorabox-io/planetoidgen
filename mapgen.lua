@@ -42,6 +42,7 @@ minetest.register_on_generated(function(minp, maxp, seed)
 		return
 	end
 
+	local t0 = minetest.get_us_time()
 
 	local vm, emin, emax = minetest.get_mapgen_object("voxelmanip")
 	local data = vm:get_data()
@@ -94,5 +95,12 @@ minetest.register_on_generated(function(minp, maxp, seed)
 
 	vm:set_data(data)
 	vm:write_to_map()
+
+	local t1 = minetest.get_us_time()
+	local micros = t1 -t0
+
+	if planetoidgen.profile_mapgen then
+		print("[planetoidgen] mapgen for " .. minetest.pos_to_string(minp) .. " took " .. micros .. " us")
+	end
 
 end)
