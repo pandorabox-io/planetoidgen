@@ -2,7 +2,11 @@ local c_ignore = minetest.get_content_id("ignore")
 local c_air = minetest.get_content_id("air")
 
 local c_shell = minetest.get_content_id("default:stone")
-local c_top = minetest.get_content_id("default:dirt_with_grass")
+--local c_top = minetest.get_content_id("default:dirt_with_grass")
+--local c_top = minetest.get_content_id("default:dirt_with_rainforest_litter")
+--local c_top = minetest.get_content_id("default:dirt_with_dry_grass")
+--local c_top = minetest.get_content_id("default:dirt_with_coniferous_litter")
+local c_top = minetest.get_content_id("default:dirt_with_snow")
 
 
 local get_corners = function(minp, maxp)
@@ -74,6 +78,8 @@ minetest.register_on_generated(function(minp, maxp, seed)
 		end -- air check
 	end -- iter
 
+	vm:set_data(data)
+
 	if minp.y < planet.pos.y then
 		print("[planetoidgen] generating ores for " .. minetest.pos_to_string(minp))
 		-- generate ores
@@ -95,7 +101,6 @@ minetest.register_on_generated(function(minp, maxp, seed)
 
 	end
 
-	vm:set_data(data)
 	vm:write_to_map()
 
 	local t1 = minetest.get_us_time()
