@@ -1,13 +1,25 @@
 local c_ignore = minetest.get_content_id("ignore")
 local c_air = minetest.get_content_id("air")
-
 local c_shell = minetest.get_content_id("default:stone")
---local c_top = minetest.get_content_id("default:dirt_with_grass")
---local c_top = minetest.get_content_id("default:dirt_with_rainforest_litter")
---local c_top = minetest.get_content_id("default:dirt_with_dry_grass")
---local c_top = minetest.get_content_id("default:dirt_with_coniferous_litter")
-local c_top = minetest.get_content_id("default:dirt_with_snow")
+local c_dirt_with_grass = minetest.get_content_id("default:dirt_with_grass")
+local c_dirt_with_rainforest_litter = minetest.get_content_id("default:dirt_with_rainforest_litter")
+local c_dirt_with_dry_grass = minetest.get_content_id("default:dirt_with_dry_grass")
+local c_dirt_with_coniferous_litter = minetest.get_content_id("default:dirt_with_coniferous_litter")
+local c_dirt_with_snow = minetest.get_content_id("default:dirt_with_snow")
+local c_sand = minetest.get_content_id("default:sand")
 
+
+local noise_params = {
+	offset = 0,
+	scale = 5,
+	spread = {x=256, y=256, z=256},
+	seed = 5477835,
+	octaves = 2,
+	persist = 0.5
+}
+
+local perlin
+local perlin_map = {}
 
 local get_corners = function(minp, maxp)
 	return {
@@ -48,35 +60,66 @@ minetest.register_on_generated(function(minp, maxp, seed)
 
 	local t0 = minetest.get_us_time()
 
+	-- setup perlin stuff
+	local side_length = maxp.x - minp.x + 1 -- 80
+	local map_lengths_xyz = {x=side_length, y=side_length, z=side_length}
+	perlin = perlin or minetest.get_perlin_map(noise_params, map_lengths_xyz)
+	perlin:get_2d_map_flat({x=minp.x, y=minp.z}, perlin_map)
+	local perlin_index = 1
+
+
 	local vm, emin, emax = minetest.get_mapgen_object("voxelmanip")
 	local data = vm:get_data()
 	local area = VoxelArea:new{MinEdge=emin, MaxEdge=emax}
 
-	for i in area:iter(
-		minp.x, minp.y, minp.z,
-		maxp.x, maxp.y, maxp.z
-	) do
-		if data[i] == c_air or data[i] == c_ignore then
-			local pos = area:position(i)
-			local distance_to_center = vector.distance(pos, planet.pos)
+	for z=minp.z,maxp.z do
+	for x=minp.x,maxp.x do
 
-			-- check if inside radius
-			if distance_to_center <= planet.radius then
+		-- normalized factor from 0...1
+		local perlin_factor = math.min(1, math.abs( perlin_map[perlin_index] * 0.1 ) )
 
-				local is_outer_shell = pos.y < planet.pos.y
-				local is_top = pos.y == planet.pos.y
+		for y=minp.y,maxp.y do
+			local i = area:index(x,y,z)
 
-				if is_outer_shell then
-					data[i] = c_shell
+			if data[i] == c_air or data[i] == c_ignore then
+				local pos = area:position(i)
+				local distance_to_center = vector.distance(pos, planet.pos)
 
-				elseif is_top then
-					data[i] = c_top
+				-- check if inside radius
+				if distance_to_center <= planet.radius then
 
-				end
+					local is_outer_shell = pos.y < planet.pos.y
+					local is_top = pos.y == planet.pos.y
 
-			end -- distance check
-		end -- air check
-	end -- iter
+					if is_outer_shell then
+						data[i] = c_shell
+
+					elseif is_top then
+						if perlin_factor > 0.9 then
+							data[i] = c_sand
+						elseif perlin_factor > 0.7 then
+							data[i] = c_dirt_with_dry_grass
+						elseif perlin_factor > 0.5 then
+							data[i] = c_dirt_with_coniferous_litter
+						elseif perlin_factor > 0.4 then
+							data[i] = c_dirt_with_rainforest_litter
+						elseif perlin_factor > 0.1 then
+							data[i] = c_dirt_with_grass
+						else
+							data[i] = c_dirt_with_snow
+						end
+
+					end
+
+				end -- distance check
+			end -- air check
+		end--y
+
+		perlin_index = perlin_index + 1
+
+	end--x
+	end--z
+
 
 	vm:set_data(data)
 
