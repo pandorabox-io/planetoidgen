@@ -51,6 +51,6 @@ minetest.register_on_generated(function(minp, maxp, seed)
 	local t1 = minetest.get_us_time()
 	local micros = t1 -t0
 
-	minetest.log("debug", "[planetoidgen] mapgen for " .. minetest.pos_to_string(minp) .. " took " .. micros .. " us")
+	minetest.log("action", "[planetoidgen] mapgen for " .. minetest.pos_to_string(minp) .. ", type: " .. planet.type .. " took " .. micros .. " us")
 
 end)

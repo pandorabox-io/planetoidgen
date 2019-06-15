@@ -6,5 +6,6 @@
   },
   "name": "xy",
   "type": "class-m",
-  "radius": 300
+  "radius": 300,
+  "airshell": true
 }]

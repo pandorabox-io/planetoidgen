@@ -10,7 +10,12 @@ if has_vacuum_mod then
 
       if distance < planet.radius+160 then
         -- planet is here, not space (plus safety margin for air shell)
-        return false
+        if planet.airshell then
+          return false
+        else
+          -- no airshell == space
+          return true
+        end
       end
     end
 
@@ -24,7 +29,7 @@ if has_vacuum_mod then
 
       if distance < planet.radius+10 and distance > planet.radius-10 then
         -- no air/vacuum interaction at planet boundary
-        return true
+        return planet.airshell
       end
     end
 

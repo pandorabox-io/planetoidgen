@@ -12,6 +12,10 @@ local MP = minetest.get_modpath("planetoidgen")
 dofile(MP.."/planets.lua")
 dofile(MP.."/vacuum.lua")
 dofile(MP.."/mapgen.lua")
+
+dofile(MP.."/nodes/sun.lua")
+
 dofile(MP.."/planets/classm.lua")
+dofile(MP.."/planets/sun.lua")
 
 print("[OK] Planetoidgen")
