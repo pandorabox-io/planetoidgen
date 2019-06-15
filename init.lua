@@ -18,6 +18,7 @@ dofile(MP.."/nodes/sun.lua")
 dofile(MP.."/planets/classh.lua")
 dofile(MP.."/planets/classp.lua")
 dofile(MP.."/planets/classm.lua")
+dofile(MP.."/planets/classn.lua")
 dofile(MP.."/planets/sun.lua")
 
 print("[OK] Planetoidgen")
