@@ -34,5 +34,5 @@ minetest.register_node("planetoidgen:sun", {
 	drowning = 1,
 	damage_per_second = 4 * 2,
 	post_effect_color = {a = 191, r = 255, g = 64, b = 0},
-	groups = { radioactive = 20, igniter = 1 }
+	groups = { igniter = 1 }
 })
