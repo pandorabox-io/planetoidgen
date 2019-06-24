@@ -1,8 +1,6 @@
 
 planetoidgen = {
-	miny = tonumber(minetest.settings:get("planetoidgen.miny")) or 6000,
-	maxy = tonumber(minetest.settings:get("planetoidgen.maxy")) or 10000,
-  planets = {},
+	planets = {},
 	planettypes = {} -- type => fn
 }
 
