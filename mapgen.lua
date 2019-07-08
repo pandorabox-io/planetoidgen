@@ -15,9 +15,6 @@ end
 
 minetest.register_on_generated(function(minp, maxp, seed)
 
-	local t0 = minetest.get_us_time()
-
-
 	-- search for a planet in range
 	local planet
 	for _, pos in ipairs(get_corners(minp, maxp)) do
@@ -25,16 +22,26 @@ minetest.register_on_generated(function(minp, maxp, seed)
 			local distance = vector.distance(pos, p.pos)
 
 			if distance < p.radius then
-				-- planet in range
-				local planetgenfn = planetoidgen.planettypes[planet.type]
-				if not planetgenfn then
-					minetest.log("warning", "[planetoidgen] generator not found for type: " .. planet.type)
-				else
-					planetgenfn(planet, minp, maxp, seed)
-				end
+				planet = p
 			end
 		end
 	end
+
+	-- check if a planet is defined here
+	if not planet then
+		return
+	end
+
+	local planetgenfn = planetoidgen.planettypes[planet.type]
+
+	if not planetgenfn then
+		minetest.log("warning", "[planetoidgen] generator not found for type: " .. planet.type)
+		return
+	end
+
+	local t0 = minetest.get_us_time()
+
+	planetgenfn(planet, minp, maxp, seed)
 
 	local t1 = minetest.get_us_time()
 	local micros = t1 -t0
