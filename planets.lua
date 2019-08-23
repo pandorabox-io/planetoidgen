@@ -1,4 +1,5 @@
 
+--[[
 local save_data = function()
 
    local data = minetest.write_json(planetoidgen.planets, true);
@@ -12,6 +13,7 @@ local save_data = function()
       print(S("[Planetoidgen] Error: Savefile '%s' could not be written."):format(tostring(path)));
    end
 end
+--]]
 
 
 local load_data = function()
@@ -38,7 +40,7 @@ local load_data = function()
       return false
     end
   else
-    print(S("[Planetoidgen] Error: Savefile '%s' not found."):format(tostring(path)));
+    print(("[Planetoidgen] Error: Savefile '%s' not found."):format(tostring(path)));
   end
 
   return true
@@ -50,7 +52,7 @@ load_data()
 minetest.register_chatcommand("planetoidgen_reload", {
   description = "reload planets.json",
   privs = { server = true },
-  func = function(name, param)
+  func = function()
     if load_data() then
       return true, "reload successful"
     else

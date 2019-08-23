@@ -3,7 +3,7 @@ local c_shell = minetest.get_content_id("default:stone")
 local c_top = minetest.get_content_id("default:stone")
 
 
-planetoidgen.planettypes["class-n"] = function(planet, minp, maxp, seed)
+planetoidgen.planettypes["class-n"] = function(planet, minp, maxp)
 
 	local vm, emin, emax = minetest.get_mapgen_object("voxelmanip")
 	local data = vm:get_data()

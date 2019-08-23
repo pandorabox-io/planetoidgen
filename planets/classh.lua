@@ -5,7 +5,7 @@ local c_shell = minetest.get_content_id("default:desert_sandstone")
 local c_sand = minetest.get_content_id("default:desert_sand")
 
 
-planetoidgen.planettypes["class-h"] = function(planet, minp, maxp, seed)
+planetoidgen.planettypes["class-h"] = function(planet, minp, maxp)
 
 	local vm, emin, emax = minetest.get_mapgen_object("voxelmanip")
 	local data = vm:get_data()

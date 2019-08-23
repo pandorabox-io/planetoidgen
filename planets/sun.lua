@@ -1,10 +1,8 @@
 
-local c_ignore = minetest.get_content_id("ignore")
-local c_air = minetest.get_content_id("air")
 local c_sun = minetest.get_content_id("planetoidgen:sun")
 
 
-planetoidgen.planettypes["sun"] = function(planet, minp, maxp, seed)
+planetoidgen.planettypes["sun"] = function(planet, minp, maxp)
 
 	local vm, emin, emax = minetest.get_mapgen_object("voxelmanip")
 	local data = vm:get_data()
