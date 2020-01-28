@@ -20,4 +20,8 @@ dofile(MP.."/planets/classm.lua")
 dofile(MP.."/planets/classn.lua")
 dofile(MP.."/planets/sun.lua")
 
+if minetest.get_modpath("skybox") then
+	dofile(MP.."/skybox.lua")
+end
+
 print("[OK] Planetoidgen")
