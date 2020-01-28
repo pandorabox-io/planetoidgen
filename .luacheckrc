@@ -1,6 +1,6 @@
 
 globals = {
-	"planetoidgen"
+	"planetoidgen", "vacuum"
 }
 
 read_globals = {
@@ -14,6 +14,6 @@ read_globals = {
 	"dump", "VoxelArea",
 
 	-- Deps
-	"default", "skybox", "vacuum"
+	"default", "skybox"
 
 }
