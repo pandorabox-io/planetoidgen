@@ -1,7 +1,6 @@
-allow_defined_top = true
 
 globals = {
-	"vacuum"
+	"planetoidgen"
 }
 
 read_globals = {
@@ -15,6 +14,6 @@ read_globals = {
 	"dump", "VoxelArea",
 
 	-- Deps
-	"default", "skybox"
+	"default", "skybox", "vacuum"
 
 }
