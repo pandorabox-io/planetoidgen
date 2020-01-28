@@ -43,6 +43,7 @@ for i=1,5 do
 				end
 			end
 		end,
+		priority = i,
 		textures = {
 			"sky_pos_z.png" .. col,
 			"sky_neg_z.png^[transformR180" .. col,
