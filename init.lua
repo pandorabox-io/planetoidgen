@@ -7,9 +7,12 @@ planetoidgen = {
 
 local MP = minetest.get_modpath("planetoidgen")
 
-dofile(MP.."/planets.lua")
 dofile(MP.."/api.lua")
-dofile(MP.."/vacuum.lua")
+
+if minetest.get_modpath("vacuum") then
+	dofile(MP.."/vacuum.lua")
+end
+
 dofile(MP.."/mapgen.lua")
 
 dofile(MP.."/nodes/sun.lua")

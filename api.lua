@@ -1,6 +1,6 @@
 
 -- returns true if pos occupied (with safety margin)
-planetoidgen.is_occupied = function(pos)
+function planetoidgen.is_occupied(pos)
   for _, planet in ipairs(planetoidgen.planets) do
     local distance = vector.distance(pos, planet.pos)
 
@@ -11,4 +11,9 @@ planetoidgen.is_occupied = function(pos)
   end
 
   return false
+end
+
+-- add a new planetoid
+function planetoidgen.register_planet(planet_def)
+  table.insert(planetoidgen.planets, planet_def)
 end
