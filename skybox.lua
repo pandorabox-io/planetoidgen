@@ -19,7 +19,7 @@ skybox.register({
 })
 
 for i=1,5 do
- local col = "^[colorize:#0000FF:" .. i * 10
+ local col = "^[colorize:#7476F2:" .. i * 20
 
 	skybox.register({
 		-- https://github.com/Ezhh/other_worlds/blob/master/skybox.lua
