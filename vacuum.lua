@@ -1,16 +1,12 @@
 local old_is_pos_in_space = vacuum.is_pos_in_space
 vacuum.is_pos_in_space = function(pos)
-  for _, planet in ipairs(planetoidgen.planets) do
-    local distance = vector.distance(pos, planet.pos)
-
-    if distance < planet.radius+160 then
-      -- planet is here, not space (plus safety margin for air shell)
-      if planet.airshell then
-        return false
-      else
-        -- no airshell == space
-        return true
-      end
+  local planet = planetoidgen.get_planet_at_pos(pos, 160)
+  if planet then
+    if planet.airshell then
+      return false
+    else
+      -- no airshell == space
+      return true
     end
   end
 

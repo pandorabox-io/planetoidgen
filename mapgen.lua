@@ -18,12 +18,9 @@ minetest.register_on_generated(function(minp, maxp, seed)
 	-- search for a planet in range
 	local planet
 	for _, pos in ipairs(get_corners(minp, maxp)) do
-		for _, p in ipairs(planetoidgen.planets) do
-			local distance = vector.distance(pos, p.pos)
-
-			if distance < p.radius then
-				planet = p
-			end
+		planet = planetoidgen.get_planet_at_pos(pos)
+		if planet then
+			break
 		end
 	end
 

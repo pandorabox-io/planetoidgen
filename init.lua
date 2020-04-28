@@ -7,6 +7,7 @@ planetoidgen = {
 
 local MP = minetest.get_modpath("planetoidgen")
 
+dofile(MP.."/planet_index.lua")
 dofile(MP.."/api.lua")
 
 if minetest.get_modpath("vacuum") then

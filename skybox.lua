@@ -27,11 +27,12 @@ for i=1,5 do
 		always_day = true,
 		fly = true,
 		match = function(_, pos)
-			for _, p in ipairs(planetoidgen.planets) do
-				local distance = vector.distance(pos, p.pos)
+			local planet = planetoidgen.get_planet_at_pos(pos)
+			if planet then
+				local distance = vector.distance(pos, planet.pos)
 
-				if distance < p.radius then
-					local factor = distance / p.radius
+				if distance < planet.radius then
+					local factor = distance / planet.radius
 					if factor < 0.5 and i == 5 or
 						factor < 0.6 and i == 4 or
 						factor < 0.7 and i == 3 or
