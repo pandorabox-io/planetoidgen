@@ -25,3 +25,7 @@ planetoidgen.register_planet({
   airshell = true
 })
 ```
+
+# TODO
+
+* [ ] dyson sphere "planet" (sun core, outer shell with dirt and cobble/stone)
