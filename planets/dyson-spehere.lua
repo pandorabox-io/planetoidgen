@@ -34,7 +34,6 @@ planetoidgen.planettypes["dyson-sphere"] = function(planet, minp, maxp)
   local shell_radius = planet.radius - 20
 
   local enable_decorations = false
-  local enable_ores = false
 
 	for z=minp.z,maxp.z do
 	for x=minp.x,maxp.x do
@@ -47,7 +46,6 @@ planetoidgen.planettypes["dyson-sphere"] = function(planet, minp, maxp)
     if distance_to_center > shell_radius then
       -- shell
       data[i] = c_stone
-      enable_decorations = true
     elseif distance_to_center > dirt_radius then
       -- dirt
       data[i] = c_dirt
@@ -72,10 +70,6 @@ planetoidgen.planettypes["dyson-sphere"] = function(planet, minp, maxp)
 
   if enable_decorations then
     minetest.generate_decorations(vm, minp, maxp)
-  end
-
-  if enable_ores then
-    minetest.generate_ores(vm, minp, maxp)
   end
 
 	vm:set_data(data)
