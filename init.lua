@@ -17,6 +17,7 @@ end
 dofile(MP.."/mapgen.lua")
 
 dofile(MP.."/nodes/sun.lua")
+dofile(MP.."/nodes/airlight.lua")
 
 dofile(MP.."/planets/classh.lua")
 dofile(MP.."/planets/classp.lua")
