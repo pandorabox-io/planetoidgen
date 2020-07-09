@@ -43,7 +43,10 @@ planetoidgen.planettypes["dyson-sphere"] = function(planet, minp, maxp)
 		local pos = area:position(i)
 		local distance_to_center = vector.distance(pos, planet.pos)
 
-    if distance_to_center > shell_radius then
+		if distance_to_center > planet.radius then
+			-- space/air
+			data[i] = c_air
+    elseif distance_to_center > shell_radius then
       -- shell
       data[i] = c_stone
     elseif distance_to_center > dirt_radius then
