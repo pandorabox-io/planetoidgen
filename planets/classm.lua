@@ -71,7 +71,7 @@ planetoidgen.planettypes["class-m"] = function(planet, minp, maxp)
 
 		if planet.mountains then
 			-- add y offset to ground level
-			absolute_y_ground_height = absolute_y_ground_height + y_offset
+			absolute_y_ground_height = math.floor(absolute_y_ground_height + y_offset)
 		end
 
 		for y=minp.y,maxp.y do
