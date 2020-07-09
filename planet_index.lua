@@ -8,8 +8,8 @@ local index = {}
 -- (re-) generates the spatial index
 function planetoidgen.generate_index()
   for _, planet in ipairs(planetoidgen.planets) do
-    local min_x = planet.x - planet.radius
-    local max_x = planet.x + planet.radius
+    local min_x = planet.pos.x - planet.radius
+    local max_x = planet.pos.x + planet.radius
 
     local mapblock_min_x = math.floor(min_x / 16)
     local mapblock_max_x = math.floor(max_x / 16)
