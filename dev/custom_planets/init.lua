@@ -3,5 +3,6 @@ planetoidgen.register_planet({
   name = "my-planet",
   type = "class-m",
   radius = 50,
-  airshell = true
+  airshell = true,
+  airshell_radius = 10
 })

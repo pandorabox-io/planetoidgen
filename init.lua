@@ -1,7 +1,8 @@
 
 planetoidgen = {
 	planets = {}, -- list<planet>
-	planettypes = {} -- type => fn
+	planettypes = {}, -- type => fn
+	default_air_shell_radius = 160
 }
 
 
@@ -9,6 +10,7 @@ local MP = minetest.get_modpath("planetoidgen")
 
 dofile(MP.."/planet_index.lua")
 dofile(MP.."/api.lua")
+dofile(MP.."/chat_commands.lua")
 
 if minetest.get_modpath("vacuum") then
 	dofile(MP.."/vacuum.lua")
