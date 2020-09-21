@@ -7,6 +7,9 @@ local index = {}
 
 -- generates the spatial index for a single planet
 function planetoidgen.generate_index(planet)
+  local t0 = minetest.get_us_time()
+  local count = 0
+
   local radius = planet.radius + (planet.airshell_radius or planetoidgen.default_air_shell_radius)
   local min_mapblock = vector.round(vector.divide(vector.subtract(planet.pos, radius), 16))
   local max_mapblock = vector.round(vector.divide(vector.add(planet.pos, radius), 16))
@@ -30,11 +33,19 @@ function planetoidgen.generate_index(planet)
           -- mapblock is in the planet sphere, add to index
           local hash = minetest.hash_node_position(mapblock_pos)
           index[hash] = planet
+          count = count + 1
         end
 
       end --z
     end --y
   end --x
+
+  local t1 = minetest.get_us_time()
+  local micros = t1 -t0
+
+  minetest.log("action", "[planetoidgen] indexing for planet at " .. minetest.pos_to_string(planet.pos) ..
+    " took " .. micros .. " us and populated " .. count .. " mapblocks")
+
 end
 
 function planetoidgen.get_planet_at_pos(pos)
