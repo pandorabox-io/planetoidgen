@@ -5,23 +5,21 @@
 -- mapblock_x -> list[planets]
 local index = {}
 
--- (re-) generates the spatial index
-function planetoidgen.generate_index()
-  for _, planet in ipairs(planetoidgen.planets) do
-    local min_x = planet.pos.x - planet.radius
-    local max_x = planet.pos.x + planet.radius
+-- generates the spatial index for a single planet
+function planetoidgen.generate_index(planet)
+  local min_x = planet.pos.x - planet.radius
+  local max_x = planet.pos.x + planet.radius
 
-    local mapblock_min_x = math.floor(min_x / 16)
-    local mapblock_max_x = math.floor(max_x / 16)
+  local mapblock_min_x = math.floor(min_x / 16)
+  local mapblock_max_x = math.floor(max_x / 16)
 
-    for mapblock_x = mapblock_min_x, mapblock_max_x do
-      local stride = index[mapblock_x]
-      if not stride then
-        stride = {}
-        index[mapblock_x] = stride
-      end
-      table.insert(stride, planet);
+  for mapblock_x = mapblock_min_x, mapblock_max_x do
+    local stride = index[mapblock_x]
+    if not stride then
+      stride = {}
+      index[mapblock_x] = stride
     end
+    table.insert(stride, planet);
   end
 end
 
