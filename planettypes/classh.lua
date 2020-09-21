@@ -1,11 +1,11 @@
 
 local c_ignore = minetest.get_content_id("ignore")
 local c_air = minetest.get_content_id("air")
-local c_shell = minetest.get_content_id("default:ice")
-local c_top = minetest.get_content_id("default:snowblock")
+local c_shell = minetest.get_content_id("default:desert_sandstone")
+local c_sand = minetest.get_content_id("default:desert_sand")
 
 
-planetoidgen.planettypes["class-p"] = function(planet, minp, maxp)
+planetoidgen.register_planet_type("class-h", function(planet, minp, maxp)
 
 	local vm, emin, emax = minetest.get_mapgen_object("voxelmanip")
 	local data = vm:get_data()
@@ -30,7 +30,7 @@ planetoidgen.planettypes["class-p"] = function(planet, minp, maxp)
 						data[i] = c_shell
 
 					elseif is_top then
-						data[i] = c_top
+						data[i] = c_sand
 
 					end
 
@@ -66,4 +66,4 @@ planetoidgen.planettypes["class-p"] = function(planet, minp, maxp)
 
 	vm:set_lighting({day=15, night=0})
 	vm:write_to_map()
-end
+end)

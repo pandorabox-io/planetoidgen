@@ -18,7 +18,7 @@ local c_air = minetest.get_content_id("air")
 local c_airlight = minetest.get_content_id("planetoidgen:airlight")
 
 
-planetoidgen.planettypes["dyson-sphere"] = function(planet, minp, maxp)
+planetoidgen.register_planet_type("dyson-sphere", function(planet, minp, maxp)
 
 	local vm, emin, emax = minetest.get_mapgen_object("voxelmanip")
 	local data = vm:get_data()
@@ -79,4 +79,4 @@ planetoidgen.planettypes["dyson-sphere"] = function(planet, minp, maxp)
 
 	vm:set_lighting({day=15, night=0})
 	vm:write_to_map()
-end
+end)

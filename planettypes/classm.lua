@@ -36,7 +36,7 @@ local height_perlin_map = {}
 
 
 
-planetoidgen.planettypes["class-m"] = function(planet, minp, maxp)
+planetoidgen.register_planet_type("class-m", function(planet, minp, maxp)
 
   -- setup perlin stuff
 	local side_length = maxp.x - minp.x + 1 -- 80
@@ -142,4 +142,4 @@ planetoidgen.planettypes["class-m"] = function(planet, minp, maxp)
 
 	vm:set_lighting({day=15, night=0})
 	vm:write_to_map()
-end
+end)

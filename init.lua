@@ -1,6 +1,6 @@
 
 planetoidgen = {
-	planets = {},
+	planets = {}, -- list<planet>
 	planettypes = {} -- type => fn
 }
 
@@ -19,12 +19,12 @@ dofile(MP.."/mapgen.lua")
 dofile(MP.."/nodes/sun.lua")
 dofile(MP.."/nodes/airlight.lua")
 
-dofile(MP.."/planets/classh.lua")
-dofile(MP.."/planets/classp.lua")
-dofile(MP.."/planets/classm.lua")
-dofile(MP.."/planets/classn.lua")
-dofile(MP.."/planets/sun.lua")
-dofile(MP.."/planets/dyson-sphere.lua")
+dofile(MP.."/planettypes/classh.lua")
+dofile(MP.."/planettypes/classp.lua")
+dofile(MP.."/planettypes/classm.lua")
+dofile(MP.."/planettypes/classn.lua")
+dofile(MP.."/planettypes/sun.lua")
+dofile(MP.."/planettypes/dyson-sphere.lua")
 
 if minetest.get_modpath("skybox") then
 	dofile(MP.."/skybox.lua")

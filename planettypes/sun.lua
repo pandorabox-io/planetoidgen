@@ -2,7 +2,7 @@
 local c_sun = minetest.get_content_id("planetoidgen:sun")
 
 
-planetoidgen.planettypes["sun"] = function(planet, minp, maxp)
+planetoidgen.register_planet_type("sun", function(planet, minp, maxp)
 
 	local vm, emin, emax = minetest.get_mapgen_object("voxelmanip")
 	local data = vm:get_data()
@@ -29,4 +29,4 @@ planetoidgen.planettypes["sun"] = function(planet, minp, maxp)
 
 	vm:set_lighting({day=15, night=0})
 	vm:write_to_map()
-end
+end)
