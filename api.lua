@@ -2,7 +2,6 @@
 -- add a new planetoid
 function planetoidgen.register_planet(planet_def)
   table.insert(planetoidgen.planets, planet_def)
-  planetoidgen.generate_index(planet_def)
 end
 
 -- add new planet-type
